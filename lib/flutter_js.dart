@@ -15,6 +15,7 @@ class FlutterJs {
   factory FlutterJs() => _instance ??= new FlutterJs._();
   FlutterJs._() {
     _channel.setMethodCallHandler(_handleMessages);
+    _channel.invokeMethod("initEngine", 1);
   }
   Future<Null> _handleMessages(MethodCall call) async {
     switch (call.method) {
@@ -27,11 +28,6 @@ class FlutterJs {
   static Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
-  }
-
-  static Future<int> initEngine() async {
-    final int engineId = await _channel.invokeMethod("initEngine", 1);
-    return engineId;
   }
 
   static Future<String> evaluate(String command, int id, {String convertTo = ""}) async {
