@@ -31,6 +31,7 @@ class FlutterJs {
   }
 
   static Future<String> evaluate(String command, int id, {String convertTo = ""}) async {
+    id = (id == null) ? 1 : id;
     var arguments = {
       "engineId": id,
       "command": command,
